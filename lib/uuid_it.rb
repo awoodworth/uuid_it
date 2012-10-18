@@ -29,6 +29,10 @@ module ActiveRecord
           self.build_uuid_object(:uuid => UUID.create.to_s)
           self.save unless self.new_record?
         end
+
+        def to_param
+          self.uuid
+        end
       end
     end
   end

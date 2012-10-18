@@ -63,4 +63,9 @@ class UuidItTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test "should return uuid when object called as parameter" do
+    car = Car.create
+    assert_equal car.to_param, car.uuid
+  end
 end

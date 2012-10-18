@@ -16,6 +16,7 @@ module ActiveRecord
       def find_by_uuid uuid
         return Uuid.find_by_uuidable_type_and_uuid(self.name, uuid).try(:uuidable)
       end
+      alias :find_by_uuid! :find_by_uuid
 
       module InstanceMethods
         def uuid

@@ -48,6 +48,15 @@ class UuidItTest < ActiveSupport::TestCase
     assert_nil Car.find_by_uuid(scooter.uuid)
   end
 
+  test "find_by_uuid!" do
+    car = Car.create
+    scooter = Scooter.create
+
+    assert_nil Car.find_by_uuid!("bla")
+    assert_equal car, Car.find_by_uuid!(car.uuid)
+    assert_nil Car.find_by_uuid!(scooter.uuid)
+  end
+
   test "should only create one uuid object when a new object with a uuid is saved" do
     assert_difference "Uuid.count", 1 do
       c = Car.new

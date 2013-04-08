@@ -34,6 +34,10 @@ module ActiveRecord
         def to_param
           self.uuid
         end
+
+        def short_uuid
+          self.uuid[-8..-1]
+        end
       end
     end
   end

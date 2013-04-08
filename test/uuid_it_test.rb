@@ -80,6 +80,6 @@ class UuidItTest < ActiveSupport::TestCase
 
   test "should return last 8 characters of uuid when #short_uuid is provided" do
     car = Car.create
-    assert_equal car.short_uuid, car.uuid[-8..-1]
+    assert_equal car.short_uuid, car.uuid[0..7]
   end
 end

@@ -36,7 +36,7 @@ module ActiveRecord
         end
 
         def short_uuid
-          self.uuid[-8..-1]
+          self.uuid[0..7]
         end
       end
     end

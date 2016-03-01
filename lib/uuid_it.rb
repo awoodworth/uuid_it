@@ -8,15 +8,18 @@ module ActiveRecord
       def uuid_it
         class_eval do
           send :include, InstanceMethods
+          send :extend, ClassMethods
           has_one :uuid_object, :as => :uuidable, :class_name => "Uuid", :dependent => :destroy
           after_create :assign_uuid
         end
       end
 
-      def find_by_uuid uuid
-        Uuid.find_by_uuidable_type_and_uuid(self.name, uuid).try(:uuidable) || raise(ActiveRecord::RecordNotFound.new)
+      module ClassMethods
+        def find_by_uuid uuid
+          Uuid.find_by_uuidable_type_and_uuid(self.name, uuid).try(:uuidable) || raise(ActiveRecord::RecordNotFound.new)
+        end
+        alias :find_by_uuid! :find_by_uuid
       end
-      alias :find_by_uuid! :find_by_uuid
 
       module InstanceMethods
         def uuid
